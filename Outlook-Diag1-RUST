@@ -1,0 +1,49 @@
+//
+// Outlook Diag1 - RUST example.
+//
+
+
+use windows::COM;
+use windows::HRESULT;
+use std::ptr;
+
+fn main() {
+    // Initialize COM
+    COM::initialize().unwrap();
+
+    // Create a new instance of Outlook Application
+    let outlook = COM::create_instance::<OutlookApplication>().unwrap();
+
+    // Get Outlook version
+    let version = outlook.get_version().unwrap();
+
+    // Get Outlook accounts
+    let accounts = outlook.get_accounts().unwrap();
+
+    // Get Outlook add-ins
+    let addins = registry::get_outlook_addins().unwrap();
+
+    // Display collected information
+    println!("Outlook Version: {}", version);
+    println!("Outlook Accounts: {:?}", accounts);
+    println!("Outlook Add-ins: {:?}", addins);
+}
+
+// Define OutlookApplication COM interface
+#[COM]
+trait OutlookApplication {
+    fn get_version(&self) -> Result<String, HRESULT>;
+    fn get_accounts(&self) -> Result<Vec<Account>, HRESULT>;
+    // Other necessary methods
+}
+
+struct Account {
+    display_name: String,
+    user_name: String,
+}
+
+mod registry {
+    // Functions to retrieve Outlook add-ins from registry
+}
+
+
