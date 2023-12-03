@@ -1,0 +1,57 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+  <settings pass="oobeSystem">
+    <!-- Previous settings remain unchanged -->
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <!-- Existing settings remain unchanged -->
+    </component>
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <!-- Existing settings remain unchanged -->
+    </component>
+  </settings>
+
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <!-- Existing settings remain unchanged -->
+    </component>
+
+    <component name="Microsoft-Windows-DNS-Server-Role" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <Interfaces>
+        <Interface wcm:action="add">
+          <EnableDhcp>true</EnableDhcp>
+          <EnableStatic>false</EnableStatic>
+          <Identifier>Local Area Connection</Identifier>
+        </Interface>
+      </Interfaces>
+    </component>
+
+    <component name="Microsoft-Windows-DHCP-Server-Role" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <Server>
+        <RoleInstalled>true</RoleInstalled>
+      </Server>
+    </component>
+
+    <component name="Microsoft-Windows-ADDS-Role" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <InstallDns>true</InstallDns>
+      <CreateDnsDelegation>true</CreateDnsDelegation>
+      <DnsDelegationUserName>username</DnsDelegationUserName>
+      <DnsDelegationPassword>password</DnsDelegationPassword>
+      <EnableDnsRoundRobin>true</EnableDnsRoundRobin>
+      <ReplicaOrNewDomain>Domain</ReplicaOrNewDomain>
+      <NewDomain>true</NewDomain>
+      <NewDomainDNSName>domain.local</NewDomainDNSName>
+      <ForestMode>WinThresholdForest</ForestMode>
+      <DomainNetbiosName>DOMAIN</DomainNetbiosName>
+      <DatabasePath>%systemroot%\NTDS</DatabasePath>
+      <LogPath>%systemroot%\NTDS</LogPath>
+      <SysvolPath>%systemroot%\SYSVOL</SysvolPath>
+      <SafeModeAdminPassword>
+        <Value>P@ssw0rd</Value>
+        <PlainText>true</PlainText>
+      </SafeModeAdminPassword>
+    </component>
+  </settings>
+
+  <!-- Existing components for offlineImage remain unchanged -->
+</unattend>
